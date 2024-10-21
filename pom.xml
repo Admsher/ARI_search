@@ -29,6 +29,18 @@
   </dependencyManagement>
 
   <dependencies>
+
+      <dependency>
+        <groupId>javax.json</groupId>
+        <artifactId>javax.json-api</artifactId>
+        <version>1.1.4</version>
+    </dependency>
+    
+    <dependency>
+        <groupId>org.glassfish</groupId>
+        <artifactId>javax.json</artifactId>
+        <version>1.1.4</version>
+    </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter-api</artifactId>
@@ -71,11 +83,11 @@
       <artifactId>parquet-hadoop</artifactId>
       <version>1.14.1</version>
     </dependency>
-    <dependency>
+    <!--dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
       <artifactId>jackson-databind</artifactId>
       <version>2.18.0</version>
-    </dependency>
+    </dependency-->
 
 
   </dependencies>

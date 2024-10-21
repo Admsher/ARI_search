@@ -1,7 +1,7 @@
 package com.arexperts;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
+// import com.fasterxml.jackson.databind.JsonNode;
+// import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -14,9 +14,14 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
 
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import javax.json.JsonWriter;
+
 public class ArticleLoader {
 
-    private static final ObjectMapper objectMapper = new ObjectMapper();
+    //private static final ObjectMapper objectMapper = new ObjectMapper();
 
     public static Article[] loadArticlesForSearching(String fileName, int csvColumnIndex, String jsonTextField, String jsonIDField, String prefixSeparator, String suffixSeparator) {
         ArrayList<Article> returnedArticles = new ArrayList<Article>();
@@ -61,12 +66,13 @@ public class ArticleLoader {
             BufferedReader in = new BufferedReader(reader);
             String readString;
             while ((readString = in.readLine()) != null){
-                JsonNode jsonNode = objectMapper.readTree(readString);
-                if (jsonNode.has(jsonTextField) && jsonNode.has(jsonIDField))
-                {
-                    Article article = Article.build(jsonNode.get(jsonTextField).asText(), jsonNode.get(jsonIDField).asText());
-                    returnedArticles.add(article);    
-                }
+                 try (JsonReader jsonReader = Json.createReader(new StringReader(readString))) {
+                    JsonObject jsonObject = jsonReader.readObject();
+                    if (jsonObject.containsKey(jsonTextField) && jsonObject.containsKey(jsonIDField)) {
+                        Article article = Article.build(jsonObject.getString(jsonTextField), jsonObject.getString(jsonIDField));
+                        returnedArticles.add(article);
+                    }
+                 }
             }
         } catch (IOException e) {
             System.err.println("Error processing file " + fileName + ": " + e.getMessage());
