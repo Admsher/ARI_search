@@ -19,6 +19,17 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
+
+/**
+ * Searcher.java
+ *
+ * This class is the main entry point for the article matching search program.
+ * It uses the ArticleIndex class to load the index of articles, and then it
+ * uses the ArticleLoader class to load articles from a directory of CSV files.
+ * It then searches the articles using the ArticleIndex and prints the
+ * results to a CSV file.
+ *
+ */
 public class Searcher {
 
     public static final int TIMEOUT_PERIOD_IN_SECONDS = 120; // Make this lower if you want to benchmark search speed.
@@ -248,3 +259,4 @@ public class Searcher {
         return articlesSearched.get();
     }    
 }
+

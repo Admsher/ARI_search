@@ -19,10 +19,27 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 import javax.json.JsonWriter;
 
+
+/**
+ * This class contains methods for loading articles from different file types.
+ */
 public class ArticleLoader {
 
     //private static final ObjectMapper objectMapper = new ObjectMapper();
 
+    /**
+     * This method takes a file name and loads articles from it.
+     * The type of the file is determined by its extension.
+     * Supported file types are CSV, JSON and Text.
+     * If the file type is not supported it returns an empty array.
+     * @param fileName the file to load articles from
+     * @param csvColumnIndex the index of the column to load from CSV files
+     * @param jsonTextField the name of the field to load from JSON files
+     * @param jsonIDField the name of the field to load from JSON files
+     * @param prefixSeparator the separator to use when loading text files
+     * @param suffixSeparator the separator to use when loading text files
+     * @return an array of articles
+     */
     public static Article[] loadArticlesForSearching(String fileName, int csvColumnIndex, String jsonTextField, String jsonIDField, String prefixSeparator, String suffixSeparator) {
         ArrayList<Article> returnedArticles = new ArrayList<Article>();
 
@@ -118,3 +135,4 @@ public class ArticleLoader {
 
 
 }
+

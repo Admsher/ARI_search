@@ -9,9 +9,20 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 
-
+// Reads CSV files and adds th strings to the ArticleIndex
 public class CSVReader {
 
+
+    /**
+     * Reads CSV files and adds the strings to the ArticleIndex
+     * @param directoryPath The directory containing the CSV files
+     * @param columnIndex The index of the column containing the text to be added
+     * @param filesToProcess The number of files to process
+     * @param offsetFileNumber The number of files to skip
+     * @param nGramLength The length of the n-grams to use
+     * @param maximumNumberOfNGrams The maximum number of n-grams to add
+     * @return An ArticleIndex with the text from the CSV files
+     */
     public static ArticleIndex loadNGramsFromCSVFiles(String directoryPath,  int columnIndex, int filesToProcess, int offsetFileNumber, int nGramLength, int maximumNumberOfNGrams) {
         int fileCount = 0;
         int filesProcessed = 0;
@@ -67,6 +78,13 @@ public class CSVReader {
         return article;
     }
 
+
+
+    /**
+     * Get a list of all files in a directory
+     * @param directoryPath the path to the directory
+     * @return a list of all files in the directory
+     */
     public static File[] getFileList(String directoryPath)
     {
         File directory = new File(directoryPath);
@@ -78,12 +96,15 @@ public class CSVReader {
             System.err.println("Given path '" + directoryPath + "' is not a directory.");
             return null;
         }
+        // Get a list of all files in the directory
         File[] files = directory.listFiles();
         if (files == null) {
             System.err.println("No files found in directory");
             return null;
         }
 
+        // Return the list of files
         return files;
     }
+
 }
