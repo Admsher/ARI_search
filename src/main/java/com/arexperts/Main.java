@@ -9,15 +9,7 @@ import java.io.IOException;
 public class Main {
 
     public final static long startTime = System.nanoTime();
-
     public static void main(String[] args) {
-        /*
-         * Reads configuration from file 'input.txt' and performs the following steps:
-         * 1. Loads nGrams from CSV files in given directory
-         * 2. Scans given directory for new files
-         * 3. Processes the files in order by converting them to JSON and searching for matches
-         * 4. Prints matches to console
-         */
         
         try (BufferedReader br = new BufferedReader(new FileReader("input.txt"))) {
             // Initialize variables
@@ -168,7 +160,6 @@ public class Main {
 
         System.out.println("Total execution time: " + getElapsedTime() + "s");
     }
-
 
     private static double getElapsedTime()
     {        

@@ -19,20 +19,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
-
-/**
- * Searcher.java
- *
- * This class is the main entry point for the article matching search program.
- * It uses the ArticleIndex class to load the index of articles, and then it
- * uses the ArticleLoader class to load articles from a directory of CSV files.
- * It then searches the articles using the ArticleIndex and prints the
- * results to a CSV file.
- *
- */
 public class Searcher {
 
-    public static final int TIMEOUT_PERIOD_IN_SECONDS = 120; // Make this lower if you want to benchmark search speed.
+    public static final int TIMEOUT_PERIOD_IN_SECONDS = 1200; // Make this lower if you want to benchmark search speed.
     public static final String CHECKED_FILES_STORAGE = "checked_files.ser";
 
     private ArticleIndex index;
@@ -52,7 +41,7 @@ public class Searcher {
     private int scoreThreshold;
     private int bufferSize;
     private int filesPerDump;
-
+    
     public Searcher(ArticleIndex index, int threadsToUse, String watchDirectory, int columnIndex, String jsonTextField, String jsonIDField, String prefixSeparator, String suffixSeparator, int scoreThreshold, int bufferSize, int filesPerDump) {
         this.index = index;
         this.threads = threadsToUse;
@@ -186,7 +175,7 @@ public class Searcher {
         executor.shutdown();
         try 
         {
-            executor.awaitTermination(30, TimeUnit.SECONDS);
+            executor.awaitTermination(300, TimeUnit.SECONDS);
             System.out.println("Thread timeout finished.");
             writer.flush();
             writer.close();
@@ -256,7 +245,7 @@ public class Searcher {
     }
 
     public int checkedArticles() {
-        return articlesSearched.get();
+        int searched_answer=articlesSearched.get();
+        return searched_answer;
     }    
 }
-

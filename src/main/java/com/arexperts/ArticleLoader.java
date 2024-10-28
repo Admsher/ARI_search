@@ -1,8 +1,5 @@
 package com.arexperts;
 
-// import com.fasterxml.jackson.databind.JsonNode;
-// import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,29 +14,11 @@ import org.apache.commons.csv.CSVRecord;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
-import javax.json.JsonWriter;
 
-
-/**
- * This class contains methods for loading articles from different file types.
- */
 public class ArticleLoader {
 
     //private static final ObjectMapper objectMapper = new ObjectMapper();
 
-    /**
-     * This method takes a file name and loads articles from it.
-     * The type of the file is determined by its extension.
-     * Supported file types are CSV, JSON and Text.
-     * If the file type is not supported it returns an empty array.
-     * @param fileName the file to load articles from
-     * @param csvColumnIndex the index of the column to load from CSV files
-     * @param jsonTextField the name of the field to load from JSON files
-     * @param jsonIDField the name of the field to load from JSON files
-     * @param prefixSeparator the separator to use when loading text files
-     * @param suffixSeparator the separator to use when loading text files
-     * @return an array of articles
-     */
     public static Article[] loadArticlesForSearching(String fileName, int csvColumnIndex, String jsonTextField, String jsonIDField, String prefixSeparator, String suffixSeparator) {
         ArrayList<Article> returnedArticles = new ArrayList<Article>();
 
@@ -87,10 +66,14 @@ public class ArticleLoader {
                     JsonObject jsonObject = jsonReader.readObject();
                     if (jsonObject.containsKey(jsonTextField) && jsonObject.containsKey(jsonIDField)) {
                         Article article = Article.build(jsonObject.getString(jsonTextField), jsonObject.getString(jsonIDField));
+                        //After adding the aricle variable is of no use so why not delete it
                         returnedArticles.add(article);
+                        //And verdict is delete it  👍
+                        article.deleteArticle();
                     }
                  }
             }
+            
         } catch (IOException e) {
             System.err.println("Error processing file " + fileName + ": " + e.getMessage());
         }
@@ -135,4 +118,3 @@ public class ArticleLoader {
 
 
 }
-

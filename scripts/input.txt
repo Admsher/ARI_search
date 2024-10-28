@@ -1,0 +1,5 @@
+nyt.txt|"New York Times"|www.nytimes.com
+ct.txt|"Chicago Tribune"|www.chicagotribune.com
+dp.txt|"Denver Post"|www.denverpost.com
+mn.txt|"Mercury News"|www.mercurynews.com
+nyd.txt|www.nydailynews.com
