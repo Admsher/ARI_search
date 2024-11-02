@@ -143,7 +143,10 @@ public class Main {
             System.out.println("Files per state save             : " + filesPerDump);
             
 
-            ArticleIndex articles = CSVReader.loadNGramsFromCSVFiles(directoryPath, columnIndexByte, filesToProcess, offsetFileNumber, nGramLength, maximumNumberOfNGrams);
+           // ArticleIndex articles = new ArticleIndex(nGramLength,maximumNumberOfNGrams);
+            //ArticleIndex articles = CSVReader.loadNGramsFromCSVFiles(directoryPath, columnIndexByte, filesToProcess, offsetFileNumber, nGramLength, maximumNumberOfNGrams);
+          //  ArticleIndex articles = ExcelReader.loadNGramsFromXLSXFile(directoryPath,columnIndexByte,filesToProcess,offsetFileNumber,nGramLength,maximumNumberOfNGrams);
+            ArticleIndex articles = FileProcessor.loadNGramsFromFiles(directoryPath,columnIndexByte,filesToProcess,offsetFileNumber,nGramLength,maximumNumberOfNGrams);
             System.out.println("Time to load data from files : " + getElapsedTime() + "s");
 
             System.out.println("Using " + articles.NumberOfArticles() + " articles for match.");
